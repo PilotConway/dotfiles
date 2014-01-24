@@ -20,6 +20,25 @@ SKIP=`awk '/^__END_SCRIPT__/ { print NR + 1; exit 0; }' $0`
 tail -n+$SKIP $THIS | tar -xzf - -C $TMPDIR
 echo "Done"
 
+## 
+# Installation
+##
+PREV_DIR=`pwd`
+cd $TMPDIR
+
+# Install Dotfiles
+echo -n "Installing dotfiles..."
+cd dotfiles
+cp -R .[^.]* $HOME/
+cd ../
+echo "Done"
+
+cd $PREV_DIR
+
+## 
+# Cleanup 
+## 
+
 # remove the temp directory
 rm -rf $TMPDIR
 
