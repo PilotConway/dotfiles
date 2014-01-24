@@ -1,0 +1,17 @@
+[user]
+    name=John L Conway IV
+    email=John.Conway@EffectiveSoftware.net
+[core]
+    editor=vim
+[color]
+    ui=auto
+    diff=auto
+    status=auto
+    branch=auto
+[alias]
+    plog=log --graph
+    changed=show --name-status --pretty
+[format]
+    pretty=format:%Cyellow%h%Creset %Cmagenta%ad%Creset %Cblue%an%Creset %s
+[log]
+    date=relative
