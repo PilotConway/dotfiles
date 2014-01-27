@@ -12,6 +12,6 @@
     plog=log --graph
     changed=show --name-status --pretty
 [format]
-    pretty=format:%Cyellow%h%Creset %Cmagenta%ad%Creset %Cblue%an%Creset %s
+    pretty=format:%C(yellow)%h%Creset %C(magenta)%ad%Creset %Cblue%an%Creset %s
 [log]
     date=relative
