@@ -45,6 +45,11 @@ if &t_Co > 2 || has("gui_running")
     colorscheme desert
     syntax on
     set hlsearch
+
+    " Set background color
+    hi Normal ctermfg=grey ctermbg=black
+    set t_ut=
+
     match ErrorMsg /\%>80v.\+/
     hi ErrorMsg ctermbg=red ctermfg=white
     hi Error ctermbg=red ctermfg=white
