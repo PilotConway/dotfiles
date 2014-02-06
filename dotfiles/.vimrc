@@ -296,6 +296,49 @@ noremap <LEADER>pl <ESC>gg0#!/usr/bin/perl<ESC>:set ft=perl<CR>
 noremap <LEADER>py <ESC>gg0#!/bin/bash<ESC>:set ft=sh<CR>
 noremap <LEADER>b <ESC>gg0#!/usr/bin/python<ESC>:set ft=python<CR>
 
+
+"Run make and the current test
+nnoremap <LEADER>r :!make && ./test<CR>
+
+" Tags
+nmap <C-]> :call GotoTag()<CR>
+
+" Build systems
+noremap <LEADER>m :make
+noremap <LEADER>c :cn
+
+" Format Highlighted Section
+vnoremap <LEADER>q gq
+
+" Bring up TODO window
+noremap <LEADER>t :TODO<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NetRW
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:netrw_browse_split = 2 " Default open files in a vsplit not split
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Diffs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set diffopt=vertical
+hi DiffAdd ctermbg=green ctermfg=white
+hi DiffChange ctermbg=cyan ctermfg=black
+hi DiffText ctermbg=cyan ctermfg=green
+hi DiffDelete ctermbg=red ctermfg=white
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDChristmasTree=1
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$','\.swp$','\.swo$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinSize=55
+noremap <LEADER>n :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocmd
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has('autocmd') 
@@ -313,7 +356,6 @@ if has('autocmd')
 
     " Load templates if found in VIMHOME/templates
     autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
-    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
     " Always return to last known position if reopening a file
     autocmd BufReadPost * 
