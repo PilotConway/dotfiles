@@ -31,6 +31,7 @@ set is
 set tw=80
 set sh=/bin/bash
 set switchbuf=usetab,useopen,newtab
+set textwidth=80
 
 "" 
 " Searching
@@ -119,52 +120,6 @@ function! MyFoldText()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Auto Command
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if has('autocmd') 
-    " Enable FileType Detection
-    filetype on
-    filetype plugin on
-    filetype plugin indent on
-    
-    augroup vimrcEx
-    au!
-
-    " 
-    " Filetype specific setup
-    "
-    autocmd Filetype text setlocal textwidth=80
-    autocmd Filetype gitcommit setlocal textwidth=72
-    autocmd Filetype gitcommit setlocal wrap
-    " When editing crontab, set backup to yes rather than auto. See :help
-    " crontab and bug #53437
-    autocmd FileType crontab set backupcopy=yes
-
-    " SCons files should be interpreted as Python
-    autocmd BufRead,BufNewFile SConstruct set ft=python
-    autocmd BufRead,BufNewFile SConscript set ft=python
-
-    " Load templates if found in VIMHOME/templates
-    autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
-
-    " Always return to last known position if reopening a file
-    autocmd BufReadPost * 
-        \ if line("'\"") > 0 && line("'\"") <= line("$") | 
-        \   exe "normal g`\"" | 
-        \ endif
-    augroup END
-    
-    " Automatically save session on exit
-    autocmd VimLeave * call SaveSession()
-
-    " Start NERDTree by default
-    "autocmd VimEnter * NERDTree
-else 
-    set autoindent
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Max Tab Pages
@@ -177,7 +132,7 @@ if exists("+showtabline")
         let s = ''
         let t = tabpagenr()
         let last = tabpagenr('$')
-        let groupsize = 4
+        let groupsize = 6
         let i = 1
         let max = t / groupsize + 1
         let max = max * groupsize
@@ -337,52 +292,41 @@ noremap <LEADER>w <C-w><C-w>
 noremap <LEADER>W <C-w>W 
 
 " Useful script headers
-noremap <LEADER> <ESC>gg0#!/usr/bin/perl<ESC>:set ft=perl<CR> 
-noremap <LEADER> <ESC>gg0#!/bin/bash<ESC>:set ft=sh<CR>
-noremap <LEADER> <ESC>gg0#!/usr/bin/python<ESC>:set ft=python<CR>
-
-" Run make and the current test
-nnoremap <LEADER>r :!make && ./test<CR>
-
-" Tags 
-nmap <C-]> :call GotoTag()<CR>
-
-" Build systems
-noremap <LEADER>m :make 
-noremap <LEADER>c :cn
-
-" Format Highlighted Section
-vnoremap <LEADER>q gq
-
-" Bring up TODO window
-noremap <LEADER>t :TODO<CR>
+noremap <LEADER>pl <ESC>gg0#!/usr/bin/perl<ESC>:set ft=perl<CR> 
+noremap <LEADER>py <ESC>gg0#!/bin/bash<ESC>:set ft=sh<CR>
+noremap <LEADER>b <ESC>gg0#!/usr/bin/python<ESC>:set ft=python<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NetRW
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:netrw_browse_split = 2 " Default open files in a vsplit not split
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Diffs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set diffopt=vertical
-hi DiffAdd ctermbg=green ctermfg=white
-hi DiffChange ctermbg=cyan ctermfg=black
-hi DiffText ctermbg=cyan ctermfg=green
-hi DiffDelete ctermbg=red ctermfg=white
+if has('autocmd') 
+    " Enable FileType Detection
+    filetype on
+    filetype plugin on
+    filetype plugin indent on
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDChristmasTree=1
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$','\.swp$','\.swo$']
-let NERDTreeShowBookmarks=1
-let NERDTreeWinSize=55
-noremap <LEADER>n :NERDTreeToggle<CR>
+    augroup vimrcEx
+    au!
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Code Completion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = "context" 
+    " SCons files should be interpreted as Python
+    autocmd BufRead,BufNewFile SConstruct set ft=python
+    autocmd BufRead,BufNewFile SConscript set ft=python
+
+    " Load templates if found in VIMHOME/templates
+    autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
+
+    " Always return to last known position if reopening a file
+    autocmd BufReadPost * 
+        \ if line("'\"") > 0 && line("'\"") <= line("$") | 
+        \   exe "normal g`\"" | 
+        \ endif
+    augroup END
+    
+    " Automatically save session on exit
+    autocmd VimLeave * call SaveSession()
+
+    " Start NERDTree by default
+    "autocmd VimEnter * NERDTree
+else 
+    set autoindent
+endif
 
