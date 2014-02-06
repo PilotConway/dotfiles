@@ -313,6 +313,7 @@ if has('autocmd')
 
     " Load templates if found in VIMHOME/templates
     autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
+    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
     " Always return to last known position if reopening a file
     autocmd BufReadPost * 
