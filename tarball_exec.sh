@@ -31,6 +31,8 @@ echo -n "Installing dotfiles..."
 cd dotfiles
 cp -R .[^.]* $HOME/
 cd ../
+# add vimbackups dir
+mkdir $HOME/.vimbackups
 echo "Done"
 
 cd $PREV_DIR
