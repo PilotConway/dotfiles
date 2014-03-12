@@ -256,6 +256,14 @@ endfunction
 " Set the locations of the tags files
 set tags=./tags,tags,../tags
 
+" Use cscope and ctags
+if has("cscope")
+    set cscopetag
+
+    " Use cscope then ctags, 1 for ctag first
+    set csto=0
+end
+
 " Ensures that going to a tag will first try to find an open buffer 
 " with the file and go there, otherwise, open a new buffer
 function! GotoTag()
@@ -307,6 +315,17 @@ nnoremap <LEADER>r :!make && ./test<CR>
 
 " Tags
 nmap <C-]> :call GotoTag()<CR>
+
+if has("cscope")
+    nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR> 
+    nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR> 
+    nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR> 
+    nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR> 
+    nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR> 
+    nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+    nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>   
+    nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+end
 
 " Build systems
 noremap <LEADER>m :make
