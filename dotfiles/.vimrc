@@ -267,10 +267,15 @@ function! GotoTag()
         echo "No Tags Found"
     endtry 
 
+    " If the file is already open, go to that buffer
     let pos=getpos('.')
     if bufnr("%") != num
         e #
         tab sb #
+    " If its not then open it in a new tab instead of the same buffer
+    else 
+        e #
+        tabn
     endif 
 
     call setpos('.', pos)
