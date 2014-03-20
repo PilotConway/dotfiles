@@ -15,3 +15,5 @@
     pretty=format:%C(yellow)%h%Creset %C(magenta)%ad%Creset %Cblue%an%Creset %s
 [log]
     date=relative
+[commit]
+    template=$HOME/.gitconf/commit-template.txt
