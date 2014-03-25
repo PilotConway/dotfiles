@@ -30,6 +30,6 @@ export GMOCK_HOME=/home/jlconw2/software/gmock-1.6.0
 ## 
 function ssht() 
 { 
-    ssh $* -t "tmux -2 a || tmux -2 || /bin/bash"
+    ssh -Y $* -t "tmux -2 a || tmux -2 || /bin/bash"
 } 
 
