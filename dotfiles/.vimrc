@@ -337,6 +337,9 @@ vnoremap <LEADER>q gq
 " Bring up TODO window
 noremap <LEADER>t :TODO<CR>
 
+" Outline Plugin
+nmap <F8> :TagbarToggle<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NetRW
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
